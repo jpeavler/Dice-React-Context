@@ -1,6 +1,7 @@
 import React from 'react';
 import RollAll from './RollAll';
 import Die from './Die';
+import DiceForm from './DiceForm';
 import {DiceBagContext} from '../context/roll-context'
 class DiceBag extends React.Component {
     constructor(props){
@@ -13,7 +14,8 @@ class DiceBag extends React.Component {
                 {numSides: 10, currentRoll: 0}
             ],
             rollAll: this.rollAll,
-            rollOne: this.rollOne
+            rollOne: this.rollOne,
+            addToDice: this.addToDice
         }
     }
     randomize = (die) => {
@@ -30,6 +32,11 @@ class DiceBag extends React.Component {
         const dice = Array.from(this.state.dice);
         this.randomize(dice[index]);
         this.setState({dice});
+    }
+    addToDice = (die) => {
+        const dice = Array.from(this.state.dice);
+        dice.push(die);
+        this.setState({dice});
     } 
     render() {
         const displayDice = this.state.dice.map((die, index) => {
@@ -38,7 +45,8 @@ class DiceBag extends React.Component {
         return (
             <DiceBagContext.Provider value={this.state}>
                 <div>
-                    Roll them dice!
+                    <DiceForm/>
+                    Roll all dice: 
                     <RollAll/>
                     {displayDice}
                 </div>

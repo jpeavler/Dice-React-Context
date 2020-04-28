@@ -1,6 +1,10 @@
 import React from 'react';
 
-export const RollContext = React.createContext({
-    contextResult: '',
-    rollAll: () => {}
+export const DiceBagContext = React.createContext({
+    dice: [],
+    rollAll: () => {},
+    rollOne: () => {},
+    addToDice: () => {},
+    emptyDiceBag: () => {},
+    removeFromDiceBag: () => {}
 });

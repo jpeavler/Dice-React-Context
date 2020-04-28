@@ -18,7 +18,10 @@ class DiceForm extends Component{
                 {({addToDice}) => (
                     <div>
                         Add new Die to collection:
-                        <input type="number" onChange={this.handleInput}/>
+                        <input type="number" 
+                            onChange={this.handleInput}
+                            min="2"
+                        />
                         <button
                             onClick={() => addToDice({numSides: this.state.numSides, currentRoll: 0})}
                         >

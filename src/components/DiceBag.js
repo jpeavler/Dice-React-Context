@@ -40,7 +40,7 @@ class DiceBag extends React.Component {
     } 
     render() {
         const displayDice = this.state.dice.map((die, index) => {
-            return(<Die die={die} index={index}/>)
+            return(<Die die={die} index={index}/>)  //TODO: add delete die button here and leverage index
         })  
         return (
             <DiceBagContext.Provider value={this.state}>

@@ -1,17 +1,11 @@
 import React from 'react';
-import RollAll from './RollAll'
+import RollAll from './RollAll';
+import Die from './Die';
 import {DiceBagContext} from '../context/roll-context'
 class DiceBag extends React.Component {
     constructor(props){
         super(props);
 
-        this.rollAll = () => {
-            const dice = Array.from(this.state.dice);
-            dice.forEach((die) => {
-               die.currentRoll = Math.ceil(Math.random() * die.numSides);
-            });
-            this.setState({dice});
-        }
         this.state = {
             dice: [ 
                 {numSides: 6, currentRoll: 0},
@@ -19,15 +13,27 @@ class DiceBag extends React.Component {
                 {numSides: 10, currentRoll: 0}
             ],
             rollAll: this.rollAll,
+            rollOne: this.rollOne
         }
     }
+    randomize = (die) => {
+        die.currentRoll = Math.ceil(Math.random() * die.numSides);
+    }
+    rollAll = () => {
+        const dice = Array.from(this.state.dice);
+        dice.forEach((die) => {
+           this.randomize(die);
+        });
+        this.setState({dice});
+    }
+    rollOne = (index) => {
+        const dice = Array.from(this.state.dice);
+        this.randomize(dice[index]);
+        this.setState({dice});
+    } 
     render() {
-        const displayDice = this.state.dice.map(die => {
-            return(
-                <div>
-                    {die.numSides} : {die.currentRoll}
-                </div>
-            )
+        const displayDice = this.state.dice.map((die, index) => {
+            return(<Die die={die} index={index}/>)
         })  
         return (
             <DiceBagContext.Provider value={this.state}>
@@ -41,4 +47,4 @@ class DiceBag extends React.Component {
     }    
 }
 
-export default DiceBag
+export default DiceBag;

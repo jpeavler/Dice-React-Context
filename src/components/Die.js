@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {DiceBagContext} from '../context/roll-context'
 
-function Die(props){
+function Die({die, index}){
     return(
         <DiceBagContext.Consumer>
             {({rollOne}) => (
@@ -15,6 +15,6 @@ function Die(props){
                 </div>
             )}
         </DiceBagContext.Consumer>
-        )
+    )
 }
 export default Die;

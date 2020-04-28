@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Die from './Die';
+import {RollContext} from './../context/roll-context';
 
 class DiceBag extends Component{
     constructor(props){
@@ -23,7 +24,7 @@ class DiceBag extends Component{
     render(){
         const dice = this.state.diceArray.map((sides) => <Die sides={sides}/>)
         return (
-            <>
+            <RollContext.Provider>
                 <h2>Dice Maker</h2>
                 <form onSubmit={this.handleSubmit}>
                     <h3>How many sides do you want on your die?</h3>
@@ -32,7 +33,7 @@ class DiceBag extends Component{
                 </form>
                 <h2>Current Dice</h2>
                 {dice}
-            </>
+            </RollContext.Provider>
         );
     }
 }
